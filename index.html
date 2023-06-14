@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Engagement Calculator</title>
+  <style>
+    body {
+      font-family: monospace;
+      text-align: center;
+    }
+    .calculator {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
+    .input-field {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .input-field label {
+      margin-right: 10px;
+    }
+    .input-field input {
+      border: none;
+      border-bottom: 1px solid gray;
+      background: none;
+      color: gray;
+      padding: 5px;
+    }
+    .result {
+      font-size: 24px;
+      margin-top: 10px;
+      color: gray;
+    }
+    .button {
+      padding: 5px 10px;
+      background-color: transparent;
+      color: gray;
+      border: none;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator">
+    <div class="input-field">
+      <label for="engaged">Accounts Engaged:</label>
+      <input type="number" id="engaged">
+    </div>
+    <div class="input-field">
+      <label for="reached">Accounts Reached:</label>
+      <input type="number" id="reached">
+    </div>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    const engagedInput = document.getElementById('engaged');
+    const reachedInput = document.getElementById('reached');
+    const resultElement = document.getElementById('result');
+
+    engagedInput.addEventListener('input', calculate);
+    reachedInput.addEventListener('input', calculate);
+
+    function calculate() {
+      const engaged = parseFloat(engagedInput.value);
+      const reached = parseFloat(reachedInput.value);
+
+      if (isNaN(engaged) || isNaN(reached)) {
+        resultElement.textContent = 'Invalid input';
+        return;
+      }
+
+      const result = (engaged / reached) * 100;
+      resultElement.textContent = `Engagement Rate: ${result.toFixed(2)}%`;
+    }
+  </script>
+</body>
+</html>
